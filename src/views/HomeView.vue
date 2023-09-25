@@ -1,5 +1,5 @@
 <template>
   <div class="container">
-    <h1 class="bg-danger">This is an home page</h1>
+    <h1>This is an home page</h1>
   </div>
 </template>
