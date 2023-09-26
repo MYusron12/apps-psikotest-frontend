@@ -3,13 +3,13 @@ import { useAuthStore } from '../stores/auth'
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
       name: 'home',
       component: HomeView,
-      meta: {requiresAuth: true }
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',
@@ -31,7 +31,7 @@ const router = createRouter({
       path: '/disc',
       name: 'disc',
       component: () => import('../views/disc/Index.vue'),
-      meta: {requiresAuth: true }
+      meta: { requiresAuth: true }
     }
   ]
 })
@@ -40,7 +40,7 @@ router.beforeEach((to, from, next) => {
   if(!localStorage.getItem('token') 
       && from.name != 'login'
       && to.name != 'login'){
-    document.location="/login"
+      next('/login')
   }
   const auth_store = useAuthStore()
   if(to.meta.requiresAuth && to.name != 'login' && !auth_store.is_login)

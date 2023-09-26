@@ -7,7 +7,7 @@ export const useAuthStore = defineStore('auth', {
     user: JSON.parse(localStorage.getItem('user'))
   }),
   getters: {
-    isAuthenticate: (state) => !!state.token,
+    isAuthenticated: (state) => !!state.is_login,
   },
   actions:{
     login(form){
@@ -38,7 +38,8 @@ export const useAuthStore = defineStore('auth', {
     },
     logout(){
       this.is_login = false
-      localStorage.clear()
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
     },
   }
 })

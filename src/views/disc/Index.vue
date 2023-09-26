@@ -6,8 +6,10 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
           <div class="card col col-lg-4">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">Nama : auth.user.name</li>
+              <li class="list-group-item">Usia : </li>
+              <li class="list-group-item">Jenis Kelamin : </li>
+              <li class="list-group-item">Tanggal Test : </li>
               <li class="list-group-item">
                 <button class="btn btn-primary"
                   @click="submit()">
@@ -37,7 +39,6 @@
         </div>
         <pre>
           {{answer}}
-          {{question_test}}
         </pre>
         <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
           <div class="col" v-for="(test, i) in question_test"
@@ -95,6 +96,7 @@
 </template>
 
 <script>
+  import {useAuthStore} from '../../stores/auth'
   import axios from 'axios'
   export default{
     data() {
@@ -127,6 +129,13 @@
           describe_personality: [],
           not_describe_personality: []
         }
+      }
+    },
+    setup() {
+      const auth = useAuthStore()
+      window.stores = { auth }
+      return {
+        auth
       }
     },
   }
