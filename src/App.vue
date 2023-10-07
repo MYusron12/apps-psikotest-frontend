@@ -2,6 +2,8 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { useDark, useToggle } from "@vueuse/core"
 import {useAuthStore} from './stores/auth'
+import axios from 'axios'
+import {ref, onMounted} from 'vue'
 const isDark = useDark({
   selector: "body",
   attribute: "theme", 
@@ -10,6 +12,21 @@ const isDark = useDark({
 })
 const toggleDark = useToggle(isDark)
 const auth = useAuthStore()
+const url = import.meta.env.VITE_APP_APIHOST+'api'
+const user_menu = ref([])
+const user_sub_menu = ref([])
+const subMenu = (menuId) => {
+  return user_sub_menu.value.filter(submenu => submenu.menu_id === menuId)
+}
+onMounted(async() => {
+  try {
+    const ress = await axios.get(`${url}/user-menu`)
+    user_menu.value = ress.data.user_menu
+    user_sub_menu.value = ress.data.user_sub_menu
+  } catch (error) {
+    console.log(error);
+  }
+})
 </script>
 
 <template>
@@ -34,8 +51,24 @@ const auth = useAuthStore()
             <li class="nav-item">
               <RouterLink class="nav-link" to="/about">About</RouterLink>
             </li>
-            <li class="nav-item">
-              <RouterLink class="nav-link" to="/disc">DISC Test</RouterLink>
+            <li class="nav-item dropdown" 
+              v-for="menu in user_menu" 
+              :key="menu.id">
+              <a class="nav-link dropdown-toggle"  
+                href="#" 
+                role="button" 
+                data-bs-toggle="dropdown" 
+                aria-expanded="false">
+                {{ menu.menu }}
+              </a>
+              <ul class="dropdown-menu">
+                <li v-for="sub_menu in subMenu(menu.id)" 
+                  :key="sub_menu.id">
+                  <RouterLink class="dropdown-item" 
+                    :to="sub_menu.url">{{ sub_menu.title }}
+                  </RouterLink>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>

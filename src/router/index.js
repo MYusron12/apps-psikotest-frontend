@@ -28,11 +28,59 @@ const router = createRouter({
       meta: {requiresAuth: true }
     },
     {
-      path: '/disc',
-      name: 'disc',
-      component: () => import('../views/disc/Index.vue'),
+      path: '/disctest',
+      name: 'disctest',
+      component: () => import('../views/psikotest/Disc.vue'),
       meta: { requiresAuth: true }
-    }
+    },
+    {
+      path: '/usermenu',
+      name: 'usermenu',
+      component: HomeView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/usersubmenu',
+      name: 'usersubmenu',
+      component: HomeView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/userrole',
+      name: 'userrole',
+      component: HomeView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/useraccessmenu',
+      name: 'useraccessmenu',
+      component: HomeView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/wartegtest',
+      name: 'wartegtest',
+      component: HomeView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/tiutest',
+      name: 'tiutest',
+      component: HomeView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/aboutapps',
+      name: 'aboutapps',
+      component: HomeView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/log',
+      name: 'log',
+      component: HomeView,
+      meta: { requiresAuth: true }
+    },
   ]
 })
 

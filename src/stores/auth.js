@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"; 
 import axios from 'axios' 
+import Swal from 'sweetalert2'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -27,6 +28,14 @@ export const useAuthStore = defineStore('auth', {
         localStorage.setItem('user', JSON.stringify(user))
         this.is_login = token;
         this.user = user;
+        Swal.fire({
+          title: 'Login',
+          text: 'User has been login',
+          timer: 2000,
+          confirmButtonText: 'Ok',
+          icon: 'success',
+        })
+        document.location='/'
         return true
       })
       .catch(err => {
@@ -40,6 +49,14 @@ export const useAuthStore = defineStore('auth', {
       this.is_login = false
       localStorage.removeItem('token')
       localStorage.removeItem('user')
+      Swal.fire({
+        title: 'Logout',
+        text: 'User has been logout',
+        timer: 2000,
+        confirmButtonText: 'Ok',
+        icon: 'success',
+      })
+      document.location='/login'
     },
   }
 })

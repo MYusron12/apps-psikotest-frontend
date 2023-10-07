@@ -44,6 +44,7 @@
 
 <script>
   import { useAuthStore } from '../stores/auth'
+  import axios from 'axios'
   export default{
     data() {
       return {
